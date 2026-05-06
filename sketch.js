@@ -1,5 +1,5 @@
 //.
-const version = "1.9-indev";
+const version = "2.1-indev";
 let selected_scene = 0;
 let iframe;
 let player;
@@ -246,7 +246,7 @@ function config_mobile_landscape() {
 }
 
 function windowResized() {
-  hide_toolbar();
+  //hide_toolbar();
   if (deviceOrientation == "landscape") {
     config_mobile_landscape();
   }

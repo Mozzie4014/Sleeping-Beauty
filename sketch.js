@@ -3,15 +3,15 @@ const version = "2.1-indev";
 let selected_scene = 0;
 let iframe;
 let player;
-let ui_scale = 5;
-let current_timestamp
+let ui_scale = 2;
+let current_timestamp;
 
 let toolbar = {
   width: 50,
   height: 200,
   visible: false,
   posX: 0,
-  posY: 400,
+  posY: 410,
 };
 
 let loop_data = {
@@ -49,6 +49,7 @@ function setup() {
 
   createCanvas(float(iframe.width), float(iframe.height));
   background(150);
+  reload_help_info();
 }
 
 function draw() {
@@ -87,22 +88,22 @@ function create_ui() {
   for (let i = 0; i < scenes.length; i++) {
     ui_select_scene.option(scenes[i].name, i);
   }
-  
-   // ui_select_scene.option("Custom",scenes. length)
-  
+
+  // ui_select_scene.option("Custom",scenes. length)
+
   ui_save_timestamp = createButton("+ Timestamp");
   ui_save_timestamp.position(10000, 10000);
   ui_save_timestamp.size();
   ui_save_timestamp.mousePressed(pressed_save_timestamp);
-  
+
   ui_save_timestamp_name = createInput("Enter Timestamp Name");
   ui_save_timestamp_name.position(10000, 10000);
   ui_save_timestamp_name.size();
-  
-  ui_text_custom_features = createP("Custom Features")
-  ui_text_custom_features. position(10000,10000)
-  ui_text_custom_features. size()
-  ui_text_custom_features.style("background", "rgba(180, 220, 220, 1)")
+
+  ui_text_custom_features = createP("Custom Features");
+  ui_text_custom_features.position(10000, 10000);
+  ui_text_custom_features.size();
+  ui_text_custom_features.style("background", "rgba(180, 220, 220, 1)");
 }
 
 function selected_scene_changed() {
@@ -179,25 +180,18 @@ function show_toolbar() {
   ui_jump_time.size(50 * ui_scale, 20 * ui_scale);
   ui_jump_time.style("font-size", 10 * ui_scale + "px");
 
-  
-  
-  
-  ui_text_custom_features.position(toolbar.posX, toolbar.posY + 40 * ui_scale);
+  //ui_text_custom_features.position(toolbar.posX, toolbar.posY + 40 * ui_scale);
   ui_text_custom_features.size(80 * ui_scale, 12 * ui_scale);
   ui_text_custom_features.style("font-size", 10 * ui_scale + "px");
-  
-  
-  
-  ui_save_timestamp.position(toolbar.posX, toolbar.posY + 70 * ui_scale);
+
+  //ui_save_timestamp.position(toolbar.posX, toolbar.posY + 70 * ui_scale);
   ui_save_timestamp.size(50 * ui_scale, 13 * ui_scale);
-  ui_save_timestamp.style("font-size", 7* ui_scale + "px");
-  
-  
-  ui_save_timestamp_name.position(toolbar.posX + 55 * ui_scale, toolbar.posY + 70 * ui_scale);
+  ui_save_timestamp.style("font-size", 7 * ui_scale + "px");
+
+  //ui_save_timestamp_name.position(toolbar.posX + 55 * ui_scale, toolbar.posY + 70 * ui_scale);
   ui_save_timestamp_name.size(100 * ui_scale, 10 * ui_scale);
-  ui_save_timestamp_name.style("font-size", 8* ui_scale + "px");
-  
-  
+  ui_save_timestamp_name.style("font-size", 8 * ui_scale + "px");
+
   toolbar.visible = true;
   //console.log(iframe. height+1)
 }
@@ -211,7 +205,7 @@ function hide_toolbar() {
   ui_input_time.position(-10000, -10000);
 
   ui_jump_time.position(-10000, -10000);
-  ui_text_custom_features.position(-10000,-10000)
+  ui_text_custom_features.position(-10000, -10000);
   ui_save_timestamp.position(-10000, -10000);
   ui_save_timestamp_name.position(-10000, -10000);
   toolbar.visible = false;
@@ -246,7 +240,7 @@ function config_mobile_landscape() {
 }
 
 function windowResized() {
-  //hide_toolbar();
+  // hide_toolbar();
   if (deviceOrientation == "landscape") {
     config_mobile_landscape();
   }
@@ -283,18 +277,23 @@ function get_current_timestamp() {}
 function create() {}
 
 function pressed_save_timestamp() {
-  player.getCurrentTime().then(seconds => {
-
+  player.getCurrentTime().then((seconds) => {
     let name = ui_save_timestamp_name.value();
     let parts = scenes[scenes.length - 1].parts;
 
     // Check for duplicate by name
-    if (parts.some(p => p.name === name)) {
+    if (parts.some((p) => p.name === name)) {
       console.log("duplicate");
       return; // stop here if you want
     }
 
-    console.log("saved timestamp " + to_string(floor(seconds)) + " with name '" + name + "'");
+    console.log(
+      "saved timestamp " +
+        to_string(floor(seconds)) +
+        " with name '" +
+        name +
+        "'"
+    );
 
     parts.push({
       type: "event",
@@ -303,7 +302,5 @@ function pressed_save_timestamp() {
       start: to_string(floor(seconds)),
       end: to_string(floor(seconds)),
     });
-
   });
 }
-

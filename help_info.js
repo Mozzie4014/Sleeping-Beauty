@@ -40,7 +40,7 @@ function render_help_info() {
   for (let key in help_info) {
     if (key === "visible") continue;
     let info = help_info[key];
-    text(info.string, info.posX + ui_scale * 104, info.posY - 700);
+    text(info.string, info.posX + ui_scale * 104, info.posY - 1200);
   }
 }
 

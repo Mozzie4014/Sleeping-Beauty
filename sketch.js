@@ -3,7 +3,7 @@ const version = "2.1-indev";
 let selected_scene = 0;
 let iframe;
 let player;
-let ui_scale = 2;
+let ui_scale = 5;
 let current_timestamp;
 
 let toolbar = {

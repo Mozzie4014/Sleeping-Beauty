@@ -1,9 +1,9 @@
-//.
+//sketch.js
 const version = "2.1-indev";
 let selected_scene = 0;
 let iframe;
 let player;
-let ui_scale = 5;
+let ui_scale = 2;
 let current_timestamp;
 
 let toolbar = {
@@ -53,7 +53,9 @@ function setup() {
 }
 
 function draw() {
+  background(150)
   text(version, 0, 0);
+ if (toolbar.visible) { render_help_info()}
   // background(random()*255, random()*255, random()*255)
 }
 
@@ -194,6 +196,7 @@ function show_toolbar() {
 
   toolbar.visible = true;
   //console.log(iframe. height+1)
+  reload_help_info()
 }
 
 function hide_toolbar() {
@@ -281,10 +284,10 @@ function pressed_save_timestamp() {
     let name = ui_save_timestamp_name.value();
     let parts = scenes[scenes.length - 1].parts;
 
-    // Check for duplicate by name
+    // check for duplicate name
     if (parts.some((p) => p.name === name)) {
       console.log("duplicate");
-      return; // stop here if you want
+      return;
     }
 
     console.log(

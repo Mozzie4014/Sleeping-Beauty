@@ -26,6 +26,7 @@ let video_height;
 const video_ratio = 1.777;
 
 function setup() {
+  run_user_data()
   iframe = document.getElementById("vimeo-player");
   player = new Vimeo.Player(iframe);
 

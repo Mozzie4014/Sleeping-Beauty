@@ -1,14 +1,15 @@
 function load_scenes() {
   scenes = [];
+  let scenes2 = []
 
-  // prologue bats
+  // ------------- prologue bats ---------------
 
   scenes.push({
     name: "Prologue Caraboss",
     start: "0:18:05", // h:m:s
     end: "", // h:m:s
     length: undefined,
-    index: 1,
+    index: 0,
     parts: [
       {
         type: "",
@@ -26,15 +27,49 @@ function load_scenes() {
       },
     ],
   });
+  
+  
+  // -------------- friends act 1 ---------------
+  
+  scenes.push({
+    name: "Friends",
+    start: "0:38:49", // h:m:s
+    end: "0:40:59", // h:m:s
+    length: undefined,
+    index: 1,
+    parts: [
+      {
+        type: "event",
+        name: "Start",
+        index: 0,
+        start: "0:38:49",
+        end: "0:38:49",
+      },
+      {
+        type: "",
+        name: "Male Dance 1",
+        index: 1,
+        start: "0:38:57",
+        end: "0:39:30",
+      },
+      {
+        type: "",
+        name: "Female Quartet 1",
+        index: 2,
+        start: "0:39:30",
+        end: "0:39:47",
+      },
+    ],
+  });
 
-  // Hunt act 1
+  // ------------ Hunt act 1 ---------------
 
   scenes.push({
     name: "Hunt Party",
     start: "0:54:15", // h:m:s
     end: "1:0:55", // h:m:s
     length: undefined,
-    index: 4,
+    index: 2,
     parts: [
       {
         type: "scene",
@@ -82,7 +117,7 @@ function load_scenes() {
   });
   //----CUSTOM------
 
-  scenes.push({
+  scenes2.push({
     name: "Custom",
     start: "0:0:0", // h:m:s
     end: "0:0:0", // h:m:s
@@ -109,5 +144,4 @@ function example() {
       },
     ],
   });
-
 }

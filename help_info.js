@@ -37,7 +37,7 @@ function reload_help_info() {
 }
 
 function render_help_info() {
-  textSize(ui_scale*4)
+  textSize(ui_scale*7)
   for (let key in help_info) {
     if (key === "visible") continue;
     let info = help_info[key];

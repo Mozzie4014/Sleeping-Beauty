@@ -37,10 +37,11 @@ function reload_help_info() {
 }
 
 function render_help_info() {
+  textSize(ui_scale)
   for (let key in help_info) {
     if (key === "visible") continue;
     let info = help_info[key];
-    text(info.string, info.posX + ui_scale * 104, info.posY - 1000);
+    text(info.string, info.posX + ui_scale * 104, info.posY - 1050);
   }
 }
 

@@ -326,7 +326,7 @@ function get_debug_info() {
     show_toolbar: toolbar.visible,
     toolbar_posX: toolbar.posX,
     toolbar_posY: toolbar.posY,
-    render_scale: render_scale,
+    ui_scale: ui_scale,
   };
 
   return info;

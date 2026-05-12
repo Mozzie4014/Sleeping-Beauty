@@ -1,5 +1,5 @@
 //sketch.js
-const version = "2.1-indev";
+const version = "2.2-indev";
 let selected_scene = 0;
 let iframe;
 let player;
@@ -26,7 +26,8 @@ let video_height;
 const video_ratio = 1.777;
 
 function setup() {
-  run_user_data()
+  createCanvas(0, 0);
+  run_user_data();
   iframe = document.getElementById("vimeo-player");
   player = new Vimeo.Player(iframe);
 
@@ -47,16 +48,20 @@ function setup() {
   show_toolbar();
   hide_toolbar();
   selected_scene_changed();
-
-  createCanvas(float(iframe.width), float(iframe.height));
+  resizeCanvas(float(iframe.width), windowHeight);
   background(150);
   reload_help_info();
+
+  console.log(get_debug_info());
 }
 
 function draw() {
-  background(150)
+  background(150);
   text(version, 0, 0);
- if (toolbar.visible) { render_help_info()}
+  if (toolbar.visible) {
+    render_help_info();
+  }
+  render_debug();
   // background(random()*255, random()*255, random()*255)
 }
 
@@ -197,7 +202,7 @@ function show_toolbar() {
 
   toolbar.visible = true;
   //console.log(iframe. height+1)
-  reload_help_info()
+  reload_help_info();
 }
 
 function hide_toolbar() {
@@ -238,9 +243,15 @@ function scale_elements() {
   ui_input_time.size(sel.size().width - 7, 20);
 }
 
+function config_mobile_portrait() {
+  resize_video(1920);
+  ui_scale = float(iframe.width) / 6;
+  toolbar.posX = 0;
+}
+
 function config_mobile_landscape() {
   resize_video(3500);
-  toolbar.posX = 3510;
+  toolbar.posX = float(iframe.width) + 20;
 }
 
 function windowResized() {
@@ -251,11 +262,6 @@ function windowResized() {
   if (deviceOrientation == "portrait") {
     config_mobile_portrait();
   }
-}
-
-function config_mobile_portrait() {
-  resize_video(1920);
-  toolbar.posX = 0;
 }
 
 function empty_select() {
@@ -307,4 +313,33 @@ function pressed_save_timestamp() {
       end: to_string(floor(seconds)),
     });
   });
+}
+
+function get_debug_info() {
+  let info = {
+    //iframe
+    iframe_width: iframe.width,
+    iframe_height: iframe.height,
+    iframe_area: str(float(iframe.width) * float(iframe.height)),
+
+    // ui
+    show_toolbar: toolbar.visible,
+    toolbar_posX: toolbar.posX,
+    toolbar_posY: toolbar.posY,
+    render_scale: render_scale,
+  };
+
+  return info;
+}
+
+function render_debug() {
+  let debug_info = get_debug_info();
+  let count = Object.keys(debug_info).length;
+  let s = 30;
+  textSize(s);
+  let py = height - textSize() * 1.2 * (count - 0.5);
+  for (let [key, value] of Object.entries(debug_info)) {
+    text(key + " : " + value, 5, py);
+    py += s * 1.2;
+  }
 }
